@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nattiya Saenna | UX/UI Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Noto+Sans+Thai:wght@300;400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#0f172a',
+                    }
+                }
+            }
+        }
+    </script>
+  <script>
+    tailwind.config = {
+        darkMode: 'class',
+        theme: {
+            extend: {
+                colors: {
+                    dark: '#0f1724',
+                    cream: '#f8f7f3',
+                },
+                animation: {
+                    'blob': 'blob 10s infinite',
+                    'float-1': 'float1 10s ease-in-out infinite',
+                    'float-2': 'float2 12s ease-in-out infinite',
+                    'float-3': 'float3 14s ease-in-out infinite',
+                },
+                keyframes: {
+                    blob: {
+                        '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                        '33%': { transform: 'translate(20px, -30px) scale(1.1)' },
+                        '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                        '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                    },
+                    float1: {
+                        '0%, 100%': { transform: 'translate(0, 0)' },
+                        '50%': { transform: 'translate(10px, -20px)' },
+                    },
+                    float2: {
+                        '0%, 100%': { transform: 'translate(0, 0)' },
+                        '50%': { transform: 'translate(-15px, 15px)' },
+                    },
+                    float3: {
+                        '0%, 100%': { transform: 'translate(0, 0)' },
+                        '50%': { transform: 'translate(20px, 10px)' },
+                    }
+                }
+            }
+        }
+    }
+</script>
+<style>
+    body {
+        font-family: 'Plus Jakarta Sans', 'Noto Sans Thai', sans-serif;
+        scroll-behavior: smooth;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        overflow-x: hidden; /* ป้องกันการเลื่อนแนวนอนจากอนิเมชั่น */
+    }
+    .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+    }
+    .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .nav-link { position: relative; }
+    .nav-link::after {
+        content: ''; position: absolute; width: 0; height: 1px; bottom: -2px; left: 0;
+        background-color: currentColor; transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+    .skills-glass-card {
+        background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+        position: relative;
+        overflow: hidden;
+        transition: all 0.5s ease;
+    }
+    .dark .skills-glass-card {
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    }
+
+    .skill-card {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+   
+    
+    .blob-inner {
+        filter: blur(60px);
+        opacity: 0.4;
+        position: absolute;
+        z-index: 0;
+        pointer-events: none;
+    }
+    #mobile-menu {
+        transition: all 0.3s ease-in-out;
+        transform: translateY(-10px);
+        opacity: 0;
+        pointer-events: none;
+        display: none;
+    }
+    #mobile-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+        display: flex;
+    }
+
+    #back-to-top {
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: translateY(20px);
+    }
+    #back-to-top.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    /* แก้ไขส่วนรูปภาพโปรเจกต์ */
+    .project-image-container {
+            position: relative;
+            width: 100%;
+            padding-top: 62.5%; /* อัตราส่วน 16:10 */
+            overflow: hidden;
+            border-radius: 1.5rem;
+        }
+        .project-image-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* บังคับให้ภาพเต็มพื้นที่โดยไม่เบี้ยวหรือลอย */
+            transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+        .filter-btn.active {
+            background-color: #000;
+            color: #fff;
+            border-color: #000;
+        }
+        .dark .filter-btn.active {
+            background-color: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+
+        #mobile-menu {
+            transition: all 0.3s ease-in-out;
+            transform: translateY(-10px);
+            opacity: 0;
+            pointer-events: none;
+            display: none;
+        }
+        #mobile-menu.active {
+            transform: translateY(0); opacity: 1; pointer-events: auto; display: flex;
+        }
+            .social-link {
+        position: relative;
+    }
+    .social-link::before {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-10px);
+        background: #000;
+        color: #fff;
+        padding: 5px 12px;
+        border-radius: 6px;
+        font-size: 10px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        letter-spacing: 0.1em;
+        pointer-events: none;
+    }
+    .dark .social-link::before {
+        background: #fff;
+        color: #000;
+    }
+    .social-link:hover::before {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(-15px);
+    }
+</style>
+</head>
+<body class="bg-white text-dark dark:bg-dark dark:text-white selection:bg-black dark:selection:bg-white dark:selection:text-black">
+
+<!-- Navigation -->
+<nav class="fixed w-full z-50 bg-white/90 dark:bg-dark/90 backdrop-blur-md border-b border-gray-100 dark:border-white/5">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <button class="md:hidden text-2xl p-2 -ml-2 text-gray-700 dark:text-gray-300" id="menu-btn" aria-label="Menu">
+           <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+
+        <div class="flex items-center">
+            <a href="#" class="text-[10px] uppercase tracking-[0.3em] font-bold border border-gray-200 dark:border-white/20 px-2 py-1 rounded">PORTFOLIO</a>
+        </div>
+        
+        <div class="hidden md:flex items-center space-x-10 text-[12px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest">
+            <a href="#about" class="nav-link hover:text-black dark:hover:text-white transition-colors">About</a>
+            <a href="#skills" class="nav-link hover:text-black dark:hover:text-white transition-colors">Skills</a>
+            <a href="#work" class="nav-link hover:text-black dark:hover:text-white transition-colors">Projects</a>
+        </div>
+
+        <div class="flex items-center">
+            <button id="theme-toggle" class="p-2.5 rounded-full bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-gray-300 hover:scale-110 transition-all focus:outline-none">
+                <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path></svg>
+                <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Updated -->
+    <div id="mobile-menu" class="absolute top-20 left-0 w-full bg-white dark:bg-dark border-b border-gray-100 dark:border-white/5 p-8 flex-col space-y-6 text-[12px] font-bold uppercase tracking-[0.25em] shadow-xl">
+        <a href="#about" class="mobile-nav-link text-gray-600 dark:text-gray-300">About</a>
+        <a href="#skills" class="mobile-nav-link text-gray-600 dark:text-gray-300">Skills</a>
+        <a href="#work" class="mobile-nav-link text-gray-600 dark:text-gray-300">Projects</a>
+    </div>
+</nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative min-h-screen flex flex-col items-center justify-center px-6 pt-20 overflow-hidden bg-cream dark:bg-dark text-center">
+            
+            <!-- Animated Blobs Background -->
+            <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+                <div class="absolute top-[10%] left-[-10%] md:left-[10%] w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-orange-400/10 dark:bg-orange-500/5 rounded-full blur-[80px] md:blur-[140px] animate-blob"></div>
+                <div class="absolute bottom-[5%] right-[-10%] md:right-[5%] w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-purple-400/10 dark:bg-purple-500/5 rounded-full blur-[70px] md:blur-[120px] animate-blob" style="animation-delay: 2s;"></div>
+            </div>
+
+            <div class="max-w-4xl mx-auto relative z-10 flex flex-col items-center">
+                <!-- Text sizes adapted for mobile -->
+                <h1 class="text-6xl sm:text-7xl md:text-[110px] font-bold leading-[0.95] mb-6 md:mb-8 tracking-tighter reveal">
+                    PORTFOLIO<span class="text-yellow-500">.</span>
+                </h1>
+                
+                <p class="text-lg md:text-2xl text-gray-500 dark:text-gray-400 mb-10 leading-relaxed max-w-lg px-4 reveal" style="transition-delay: 200ms;">
+                    UX/UI Designer passionate about creating clean, user-friendly interfaces.
+                </p>
+
+                <div class="flex flex-wrap justify-center gap-6 reveal" style="transition-delay: 400ms;">
+                    <a href="#work" class="inline-flex items-center bg-black dark:bg-white text-white dark:text-black px-8 md:px-10 py-4 md:py-5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] hover:scale-105 transition-all">
+                        View My Work
+                    </a>
+                </div>
+
+                <!-- Floating Ball Animations - Fixed for Mobile -->
+                <div class="absolute inset-0 -z-10 w-full h-full pointer-events-none reveal" style="transition-delay: 600ms;">
+                    <!-- Orange Ball -->
+                    <div class="absolute top-[10%] -left-4 md:-left-20 w-16 h-16 md:w-32 md:h-32 bg-gradient-to-br from-orange-400 to-orange-500 rounded-full blur-[2px] md:blur-md animate-float-1 opacity-60 shadow-xl"></div>
+                    <!-- Purple Ball -->
+                    <div class="absolute bottom-[15%] -right-4 md:-right-20 w-20 h-20 md:w-40 md:h-40 bg-gradient-to-tr from-purple-500 to-purple-600 rounded-full blur-[2px] md:blur-md animate-float-2 opacity-60 shadow-xl"></div>
+                    <!-- Yellow Ball -->
+                    <div class="absolute top-[20%] right-4 md:right-40 w-12 h-12 md:w-28 md:h-28 bg-gradient-to-tr from-yellow-300 to-yellow-400 rounded-full blur-[1px] md:blur-sm animate-float-3 opacity-60 shadow-xl"></div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- About Me -->
+        <section id="about" class="py-32 px-6">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+                <div class="reveal">
+                    <h2 class="text-4xl font-bold mb-8">About Me</h2>
+                    <div class="text-lg text-gray-500 dark:text-gray-400 space-y-6 leading-relaxed">
+                        <p>Hello, I'm Nattiya Saenna (Poonsai), a UX/UI Designer and a recent Information Technology graduate from Khon Kaen University.</p>
+
+                        <p>I am passionate about designing user-friendly web applications with clean and intuitive interfaces that provide a smooth user experience.</p>
+                            
+                        <p>Through academic projects and design experiences, I have developed skills in UI/UX design, prototyping, and responsive web design.</p>
+                       
+                    </div>
+                </div>
+                <div class="reveal p-10 md:p-12 bg-gray-50 dark:bg-white/[0.03] rounded-[2.5rem] border border-gray-100 dark:border-white/5" style="transition-delay: 200ms;">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-12">
+                        <div>
+                            <h5 class="text-[10px] uppercase tracking-[0.2em] text-gray-400 mb-3 font-semibold">Education</h5>
+                            <p class="text-xl font-bold">Khon Kaen University</p>
+                            <p class="text-sm text-gray-500 mt-1">Bachelor of Science (IT)</p>
+                        </div>
+                        <div>
+                            <h5 class="text-[10px] uppercase tracking-[0.2em] text-gray-400 mb-3 font-semibold">Specialization</h5>
+                            <p class="text-xl font-bold">UX/UI Specialist</p>
+                            <p class="text-sm text-gray-500 mt-1">Design Systems & Prototyping</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-32 px-6 bg-gray-50/50 dark:bg-white/[0.01]">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-20 text-center md:text-left reveal">
+                    <h2 class="text-5xl font-bold tracking-tight mb-6">Skills</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+                    <div class="skill-card p-10 bg-cream dark:bg-dark rounded-[2rem] border border-gray-200/50 dark:border-white/5 reveal">
+                        <div class="w-12 h-12 bg-black dark:bg-white rounded-2xl flex items-center justify-center mb-8">
+                            <svg class="w-6 h-6 text-white dark:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">UX Research</h3>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">Study user behavior to identify pain points and solutions.</p>
+                    </div>
+                    <div class="skill-card p-10 bg-cream dark:bg-dark rounded-[2rem] border border-gray-200/50 dark:border-white/5 reveal" style="transition-delay: 100ms;">
+                        <div class="w-12 h-12 bg-black dark:bg-white rounded-2xl flex items-center justify-center mb-8">
+                            <svg class="w-6 h-6 text-white dark:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">UI Design</h3>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">Design modern and user-friendly interfaces.</p>
+                    </div>
+                    <div class="skill-card p-10 bg-cream dark:bg-dark rounded-[2rem] border border-gray-200/50 dark:border-white/5 reveal" style="transition-delay: 200ms;">
+                        <div class="w-12 h-12 bg-black dark:bg-white rounded-2xl flex items-center justify-center mb-8">
+                            <svg class="w-6 h-6 text-white dark:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Prototyping</h3>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">Create interactive prototypes for testing user flows.</p>
+                    </div>
+                    <div class="skill-card p-10 bg-cream dark:bg-dark rounded-[2rem] border border-gray-200/50 dark:border-white/5 reveal" style="transition-delay: 300ms;">
+                        <div class="w-12 h-12 bg-black dark:bg-white rounded-2xl flex items-center justify-center mb-8">
+                            <svg class="w-6 h-6 text-white dark:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Design Systems</h3>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">Build a consistent design system.</p>
+                    </div>
+                </div>
+    
+                <div class="lg:col-span-12 reveal">
+                    <div class="skills-glass-card p-12 md:p-16 rounded-[4rem] shadow-xl border border-gray-100 dark:border-white/5">
+                        <div class="absolute inset-0 pointer-events-none overflow-hidden rounded-[4rem]">
+                            <div class="blob-inner w-64 h-64 bg-orange-200/40 top-[-10%] left-[-5%] animate-blob"></div>
+                            <div class="blob-inner w-80 h-80 bg-purple-200/30 bottom-[-10%] right-[5%] animate-blob" style="animation-delay: 2s;"></div>
+                            <div class="blob-inner w-48 h-48 bg-blue-200/30 top-[20%] right-[10%] animate-blob" style="animation-delay: 4s;"></div>
+                        </div>
+    
+                        <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
+                            <div>
+                                <div class="flex items-center gap-4 mb-10">
+                                    <div class="w-1 h-8 bg-black dark:bg-white rounded-full"></div>
+                                    <h4 class="text-[11px] uppercase tracking-[0.4em] text-gray-400 dark:text-gray-500 font-black">Development Stacks</h4>
+                                </div>
+                                <div class="flex flex-wrap gap-3">
+                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">HTML</span>
+                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">CSS</span>
+                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">Tailwind CSS</span>
+                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">Bootstrap</span>
+                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">SQL</span>
+                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">Python</span>
+                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">PHP</span>
+                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">Laravel</span>
+                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">JavaScript</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-4 mb-10">
+                                    <div class="w-1 h-8 bg-orange-400 rounded-full"></div>
+                                    <h4 class="text-[11px] uppercase tracking-[0.4em] text-gray-400 dark:text-gray-500 font-black">Design Mastery</h4>
+                                </div>
+                                <div class="flex flex-wrap gap-3">
+                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">Figma</span>
+                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">Adobe XD</span>
+                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">Photoshop</span>
+                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">Procreate</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="work" class="py-32 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-16 reveal">
+                    <h2 class="text-5xl font-bold tracking-tight mb-12">Projects</h2>
+                    <div class="flex flex-wrap gap-4 pb-6 border-b border-gray-100 dark:border-white/5 mb-12">
+                        <button onclick="filterProjects('all', this)" class="filter-btn active px-6 py-2 rounded-full border border-gray-100 dark:border-white/10 text-[10px] font-bold uppercase tracking-widest">All</button>
+                        <button onclick="filterProjects('E-commerce', this)" class="filter-btn px-6 py-2 rounded-full border border-gray-100 dark:border-white/10 text-[10px] font-bold uppercase tracking-widest">E-commerce</button>
+                        <button onclick="filterProjects('Booking', this)" class="filter-btn px-6 py-2 rounded-full border border-gray-100 dark:border-white/10 text-[10px] font-bold uppercase tracking-widest">Booking</button>
+                        <button onclick="filterProjects('Entertainment', this)" class="filter-btn px-6 py-2 rounded-full border border-gray-100 dark:border-white/10 text-[10px] font-bold uppercase tracking-widest">Entertainment</button>
+                        <button onclick="filterProjects('Cosmetic', this)" class="filter-btn px-6 py-2 rounded-full border border-gray-100 dark:border-white/10 text-[10px] font-bold uppercase tracking-widest">Cosmetic</button>
+                        <button onclick="filterProjects('Restaurant', this)" class="filter-btn px-6 py-2 rounded-full border border-gray-100 dark:border-white/10 text-[10px] font-bold uppercase tracking-widest">Restaurant</button>
+                    </div>
+                </div>
+
+                <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                    
+                    <!-- 1. SOMITRA -->
+                    <div class="project-card reveal group" data-category="Entertainment">
+                        <a href="https://www.figma.com/design/KTWiNdRF956iG5GPhN63E5/Untitled?node-id=0-1&t=lOUbHy8gnO3zCoCE-1" target="_blank" class="block">
+                            <div class="aspect-[16/10] bg-gray-100 dark:bg-white/5 rounded-3xl overflow-hidden mb-6 relative border border-gray-100 dark:border-white/5 project-image-container">
+                                <!-- ใส่ลิงก์รูปภาพใน src="..." ด้านล่างนี้ -->
+                                <img src="image/somitraapp.png" alt="SOMITRA" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="absolute inset-0 hidden flex-items-center justify-center text-gray-400 font-bold opacity-20 bg-gray-100 dark:bg-white/5">SOMITRA Image</div>
+                                <div class="absolute top-4 right-4 bg-white/80 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">View Demo</div>
+                            </div>
+                            <h4 class="text-xl font-bold group-hover:text-gray-600 dark:group-hover:text-gray-400 transition-colors">SOMITRA (Community App)</h4>
+                            <p class="text-[10px] text-gray-400 mt-2 uppercase tracking-widest">UX/UI Design in Figma</p>
+                        </a>
+                    </div>
+
+                    <!-- 2. Selena -->
+                    <div class="project-card reveal group" data-category="Booking">
+                        <a href="https://www.figma.com/design/xoNYe2qDi1qwtf9gZ5OzhX/SelenaCondo?node-id=240-549&t=2mwPC5SYrppnGbUm-1" target="_blank" class="block">
+                            <div class="aspect-[16/10] bg-gray-100 dark:bg-white/5 rounded-3xl overflow-hidden mb-6 relative border border-gray-100 dark:border-white/5 project-image-container">
+                                <img src="image/selenaCondo.png" alt="Selena" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="absolute inset-0 hidden flex-items-center justify-center text-gray-400 font-bold opacity-20 bg-gray-100 dark:bg-white/5">Selena Image</div>
+                                <div class="absolute top-4 right-4 bg-white/80 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">View Design</div>
+                            </div>
+                            <h4 class="text-xl font-bold group-hover:text-gray-600 dark:group-hover:text-gray-400 transition-colors">Condo Booking - Web Application</h4>
+                            <p class="text-[10px] text-gray-400 mt-2 uppercase tracking-widest leading-relaxed">Create a web application using the 
+                                Laravel framework, design the interface with Bootstrap for styling.</p>
+                        </a>
+                    </div>
+
+                    <!-- 3. Green Garden -->
+                    <div class="project-card reveal group" data-category="E-commerce">
+                        <a href="https://greengarden.cpkku.com/" target="_blank" class="block">
+                            <div class="aspect-[16/10] bg-gray-100 dark:bg-white/5 rounded-3xl overflow-hidden mb-6 relative border border-gray-100 dark:border-white/5 project-image-container">
+                                <img src="image/greengarden.png" alt="Green Garden" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="absolute inset-0 hidden flex-items-center justify-center text-gray-400 font-bold opacity-20 bg-gray-100 dark:bg-white/5">Green Garden Image</div>
+                                <div class="absolute top-4 right-4 bg-white/80 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Visit Site</div>
+                            </div>
+                            <h4 class="text-xl font-bold">Smart Plant Marketplace Platform with AI Vision & Chatbot</h4>
+                            <p class="text-[10px] text-gray-400 mt-2 uppercase tracking-widest">Developed a Smart Plant Marketplace Platform using Laravel, PHP, MySQL, JavaScript, Bootstrap, CSS, and Python.</p>
+                        </a>
+                    </div>
+
+                    <!-- 4. POS Restaurant -->
+                    <div class="project-card reveal group" data-category="Restaurant">
+                        <a href="https://www.figma.com/design/T8veNCR29MJhfyZ9JNWDJV/eiei-team-library?node-id=512-2&t=CE44kdM7ezWF0yMp-1" target="_blank" class="block">
+                            <div class="aspect-[16/10] bg-gray-100 dark:bg-white/5 rounded-3xl overflow-hidden mb-6 relative border border-gray-100 dark:border-white/5 project-image-container">
+                                <img src="image/possystem.png" alt="POS" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="absolute inset-0 hidden flex-items-center justify-center text-gray-400 font-bold opacity-20 bg-gray-100 dark:bg-white/5">POS Image</div>
+                                <div class="absolute top-4 right-4 bg-white/80 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">View Prototype</div>
+                            </div>
+                            <h4 class="text-xl font-bold">POS Restaurant</h4>
+                            <p class="text-[10px] text-gray-400 mt-2 uppercase tracking-widest">Designed restaurant POS interface in Figma.</p>
+                        </a>
+                    </div>
+
+                    <!-- 5. Cosmetics -->
+                    <div class="project-card reveal group" data-category="Cosmetic">
+                        <a href="https://www.figma.com/design/k8VSHyWjPWBmG6p7M1bFJe/Untitled?t=OKYcSchUNHlr9OGN-1" target="_blank" class="block">
+                            <div class="aspect-[16/10] bg-gray-100 dark:bg-white/5 rounded-3xl overflow-hidden mb-6 relative border border-gray-100 dark:border-white/5 project-image-container">
+                                <img src="image/cosmetic.png" alt="Cosmetic" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="absolute inset-0 hidden flex-items-center justify-center text-gray-400 font-bold opacity-20 bg-gray-100 dark:bg-white/5">Cosmetic Image</div>
+                                <div class="absolute top-4 right-4 bg-white/80 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">View Design</div>
+                            </div>
+                            <h4 class="text-xl font-bold">Cosmetics Web App</h4>
+                            <p class="text-[10px] text-gray-400 mt-2 uppercase tracking-widest">UX/UI Design in Figma</p>
+                        </a>
+                    </div>
+
+                    <!-- 6. Tomato Book -->
+                    <div class="project-card reveal group" data-category="Entertainment">
+                        <a href="https://www.figma.com/design/HtsgEeP1IX1JgThZuCrhur/Untitled?node-id=0-1&t=vja5wb2lM2BepqgH-1" target="_blank" class="block">
+                            <div class="aspect-[16/10] bg-gray-100 dark:bg-white/5 rounded-3xl overflow-hidden mb-6 relative border border-gray-100 dark:border-white/5 project-image-container">
+                                <img src="image/tomatobook.png" alt="Tomato Book" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="absolute inset-0 hidden flex-items-center justify-center text-gray-400 font-bold opacity-20 bg-gray-100 dark:bg-white/5">Tomato Book Image</div>
+                                <div class="absolute top-4 right-4 bg-white/80 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">View Design</div>
+                            </div>
+                            <h4 class="text-xl font-bold">Tomato Book - Mobile App</h4>
+                            <p class="text-[10px] text-gray-400 mt-2 uppercase tracking-widest">UX/UI Design in Figma</p>
+                        </a>
+                    </div>
+
+                    <!-- 7. Makeup Home -->
+                    <div class="project-card reveal group" data-category="Cosmetic">
+                        <a href="https://www.figma.com/design/VeUzKiZQyo9bC1GxGoGBDF/Untitled?node-id=0-1&t=5AaLWvbzfQF9qBGv-1" target="_blank" class="block">
+                            <div class="aspect-[16/10] bg-gray-100 dark:bg-white/5 rounded-3xl overflow-hidden mb-6 relative border border-gray-100 dark:border-white/5 project-image-container">
+                                <img src="image/makeup.png" alt="Makeup Home" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="absolute inset-0 hidden flex-items-center justify-center text-gray-400 font-bold opacity-20 bg-gray-100 dark:bg-white/5">Makeup Home Image</div>
+                                <div class="absolute top-4 right-4 bg-white/80 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">View Design</div>
+                            </div>
+                            <h4 class="text-xl font-bold">Makeup Home Page</h4>
+                            <p class="text-[10px] text-gray-400 mt-2 uppercase tracking-widest">UX/UI Design in Figma</p>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact" class="relative bg-cream dark:bg-dark backdrop-blur-md border-t border-gray-100 dark:border-white/5 py-20 px-6 overflow-hidden transition-all duration-300">
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-white dark:bg-white/5 rounded-full blur-[80px] animate-blob filter opacity-70"></div>
+            <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-yellow-100/40 dark:bg-yellow-500/5 rounded-full blur-[100px] animate-blob animation-delay-4000 filter opacity-60"></div>
+        </div>
+    
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <div class="flex flex-wrap justify-center gap-x-10 gap-y-6 text-[11px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em] mb-12">
+                <a href="#about" class="hover:text-black dark:hover:text-white transition-all hover:scale-105">About</a>
+                <a href="#skills" class="hover:text-black dark:hover:text-white transition-all hover:scale-105">Skills</a>
+                <a href="#work" class="hover:text-black dark:hover:text-white transition-all hover:scale-105">Projects</a>
+                <a href="mailto:poonsai12102546@gmail.com" class="hover:text-black dark:hover:text-white transition-all hover:scale-105">Contact</a>
+            </div>
+            
+            <div class="flex justify-center items-center gap-8 mb-12">
+                <a href="https://github.com" target="_blank" class="social-link text-gray-400 dark:text-gray-500 hover:text-black dark:hover:text-white transition-all transform hover:scale-110 active:scale-95" data-tooltip="GITHUB" aria-label="GitHub">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.298 24 12c0-6.627-5.373-12-12-12"/></svg>
+                </a>
+                
+                <!-- Modern Minimalist Email Icon with Hover Tooltip -->
+                <a href="mailto:poonsai12102546@gmail.com" class="social-link text-gray-400 dark:text-gray-500 hover:text-black dark:hover:text-white transition-all transform hover:scale-110 active:scale-95" data-tooltip="POONSAI12102546@GMAIL.COM" aria-label="Email Me">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect width="20" height="16" x="2" y="4" rx="3" />
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                    </svg>
+                </a>
+    
+                <a href="https://facebook.com" target="_blank" class="social-link text-gray-400 dark:text-gray-500 hover:text-black dark:hover:text-white transition-all transform hover:scale-110 active:scale-95" data-tooltip="FACEBOOK" aria-label="Facebook">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+            </div>
+    
+            <div class="space-y-4">
+                <div class="pt-8 border-t border-gray-200 dark:border-white/10 max-w-[200px] mx-auto">
+                    <p class="text-[9px] text-gray-400 dark:text-gray-600 uppercase tracking-[0.3em] font-medium">&copy; 2026 Nattiya Saenna</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 z-[60] w-12 h-12 bg-black dark:bg-white text-white dark:text-black rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-90 transition-all group focus:outline-none" aria-label="Back to Top">
+        <svg class="w-5 h-5 transform group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+
+    <script>
+        // Theme Toggle
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            lightIcon.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            darkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('color-theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        });
+
+        // Back to Top Logic
+        const backToTopBtn = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 400) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Mobile Menu
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('active'));
+
+        // Filter
+        function filterProjects(category, btn) {
+            const cards = document.querySelectorAll('.project-card');
+            const btns = document.querySelectorAll('.filter-btn');
+            btns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            cards.forEach(card => {
+                const itemCat = card.getAttribute('data-category');
+                if (category === 'all' || itemCat === category) {
+                    card.style.display = 'block';
+                    setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; }, 10);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    setTimeout(() => { card.style.display = 'none'; }, 400);
+                }
+            });
+        }
+
+        // Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
