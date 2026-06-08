@@ -14,122 +14,108 @@
             theme: {
                 extend: {
                     colors: {
-                        dark: '#0f172a',
+                        dark: '#0f1724',
+                        cream: '#f8f7f3',
+                    },
+                    animation: {
+                        'blob': 'blob 10s infinite',
+                        'float-1': 'float1 10s ease-in-out infinite',
+                        'float-2': 'float2 12s ease-in-out infinite',
+                        'float-3': 'float3 14s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(20px, -30px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        float1: {
+                            '0%, 100%': { transform: 'translate(0, 0)' },
+                            '50%': { transform: 'translate(10px, -20px)' },
+                        },
+                        float2: {
+                            '0%, 100%': { transform: 'translate(0, 0)' },
+                            '50%': { transform: 'translate(-15px, 15px)' },
+                        },
+                        float3: {
+                            '0%, 100%': { transform: 'translate(0, 0)' },
+                            '50%': { transform: 'translate(20px, 10px)' },
+                        }
                     }
                 }
             }
         }
     </script>
-  <script>
-    tailwind.config = {
-        darkMode: 'class',
-        theme: {
-            extend: {
-                colors: {
-                    dark: '#0f1724',
-                    cream: '#f8f7f3',
-                },
-                animation: {
-                    'blob': 'blob 10s infinite',
-                    'float-1': 'float1 10s ease-in-out infinite',
-                    'float-2': 'float2 12s ease-in-out infinite',
-                    'float-3': 'float3 14s ease-in-out infinite',
-                },
-                keyframes: {
-                    blob: {
-                        '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                        '33%': { transform: 'translate(20px, -30px) scale(1.1)' },
-                        '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-                        '100%': { transform: 'translate(0px, 0px) scale(1)' },
-                    },
-                    float1: {
-                        '0%, 100%': { transform: 'translate(0, 0)' },
-                        '50%': { transform: 'translate(10px, -20px)' },
-                    },
-                    float2: {
-                        '0%, 100%': { transform: 'translate(0, 0)' },
-                        '50%': { transform: 'translate(-15px, 15px)' },
-                    },
-                    float3: {
-                        '0%, 100%': { transform: 'translate(0, 0)' },
-                        '50%': { transform: 'translate(20px, 10px)' },
-                    }
-                }
-            }
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', 'Noto Sans Thai', sans-serif;
+            scroll-behavior: smooth;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
         }
-    }
-</script>
-<style>
-    body {
-        font-family: 'Plus Jakarta Sans', 'Noto Sans Thai', sans-serif;
-        scroll-behavior: smooth;
-        transition: background-color 0.3s ease, color 0.3s ease;
-        overflow-x: hidden; /* ป้องกันการเลื่อนแนวนอนจากอนิเมชั่น */
-    }
-    .reveal {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
-    }
-    .reveal.active {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    .nav-link { position: relative; }
-    .nav-link::after {
-        content: ''; position: absolute; width: 0; height: 1px; bottom: -2px; left: 0;
-        background-color: currentColor; transition: width 0.3s ease;
-    }
-    .nav-link:hover::after { width: 100%; }
-    .skills-glass-card {
-        background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
-        position: relative;
-        overflow: hidden;
-        transition: all 0.5s ease;
-    }
-    .dark .skills-glass-card {
-        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-    }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: ''; position: absolute; width: 0; height: 1px; bottom: -2px; left: 0;
+            background-color: currentColor; transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+        .skills-glass-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+        .dark .skills-glass-card {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
 
-    .skill-card {
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-   
-    
-    .blob-inner {
-        filter: blur(60px);
-        opacity: 0.4;
-        position: absolute;
-        z-index: 0;
-        pointer-events: none;
-    }
-    #mobile-menu {
-        transition: all 0.3s ease-in-out;
-        transform: translateY(-10px);
-        opacity: 0;
-        pointer-events: none;
-        display: none;
-    }
-    #mobile-menu.active {
-        transform: translateY(0);
-        opacity: 1;
-        pointer-events: auto;
-        display: flex;
-    }
+        .skill-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .blob-inner {
+            filter: blur(60px);
+            opacity: 0.4;
+            position: absolute;
+            z-index: 0;
+            pointer-events: none;
+        }
+        #mobile-menu {
+            transition: all 0.3s ease-in-out;
+            transform: translateY(-10px);
+            opacity: 0;
+            pointer-events: none;
+            display: none;
+        }
+        #mobile-menu.active {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+            display: flex;
+        }
 
-    #back-to-top {
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        transform: translateY(20px);
-    }
-    #back-to-top.show {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-    }
-    /* แก้ไขส่วนรูปภาพโปรเจกต์ */
-    .project-image-container {
+        #back-to-top {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(20px);
+        }
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .project-image-container {
             position: relative;
             width: 100%;
             padding-top: 62.5%; /* อัตราส่วน 16:10 */
@@ -142,7 +128,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* บังคับให้ภาพเต็มพื้นที่โดยไม่เบี้ยวหรือลอย */
+            object-fit: cover;
             transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
         }
         .project-card:hover img {
@@ -162,52 +148,53 @@
             border-color: #fff;
         }
 
-        #mobile-menu {
-            transition: all 0.3s ease-in-out;
-            transform: translateY(-10px);
+        .social-link {
+            position: relative;
+        }
+        .social-link::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            background: #000;
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 10px;
+            white-space: nowrap;
             opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            letter-spacing: 0.1em;
             pointer-events: none;
-            display: none;
         }
-        #mobile-menu.active {
-            transform: translateY(0); opacity: 1; pointer-events: auto; display: flex;
+        .dark .social-link::before {
+            background: #fff;
+            color: #000;
         }
-            .social-link {
-        position: relative;
-    }
-    .social-link::before {
-        content: attr(data-tooltip);
-        position: absolute;
-        bottom: 100%;
-        left: 50%;
-        transform: translateX(-50%) translateY(-10px);
-        background: #000;
-        color: #fff;
-        padding: 5px 12px;
-        border-radius: 6px;
-        font-size: 10px;
-        white-space: nowrap;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        letter-spacing: 0.1em;
-        pointer-events: none;
-    }
-    .dark .social-link::before {
-        background: #fff;
-        color: #000;
-    }
-    .social-link:hover::before {
-        opacity: 1;
-        visibility: visible;
-        transform: translateX(-50%) translateY(-15px);
-    }
-</style>
+        .social-link:hover::before {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(-15px);
+        }
+
+        /* Modal Styles for Case Study */
+        .modal-active {
+            overflow: hidden !important;
+        }
+        #case-study-modal {
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        #modal-content-container {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+    </style>
 </head>
 <body class="bg-white text-dark dark:bg-dark dark:text-white selection:bg-black dark:selection:bg-white dark:selection:text-black">
 
-<!-- Navigation -->
-<nav class="fixed w-full z-50 bg-white/90 dark:bg-dark/90 backdrop-blur-md border-b border-gray-100 dark:border-white/5">
+<!-- Navigation (เปลี่ยนจาก bg-white/90 เป็นสีทึบ bg-white dark:bg-dark เพื่อป้องกันพื้นหลังทะลุ) -->
+<nav class="fixed w-full z-50 bg-white dark:bg-dark border-b border-gray-100 dark:border-white/5">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <button class="md:hidden text-2xl p-2 -ml-2 text-gray-700 dark:text-gray-300" id="menu-btn" aria-label="Menu">
            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -231,7 +218,7 @@
         </div>
     </div>
 
-    <!-- Mobile Menu Updated -->
+    <!-- Mobile Menu Updated (เปลี่ยนจาก bg-white เป็นสีทึบ) -->
     <div id="mobile-menu" class="absolute top-20 left-0 w-full bg-white dark:bg-dark border-b border-gray-100 dark:border-white/5 p-8 flex-col space-y-6 text-[12px] font-bold uppercase tracking-[0.25em] shadow-xl">
         <a href="#about" class="mobile-nav-link text-gray-600 dark:text-gray-300">About</a>
         <a href="#skills" class="mobile-nav-link text-gray-600 dark:text-gray-300">Skills</a>
@@ -250,13 +237,12 @@
             </div>
 
             <div class="max-w-4xl mx-auto relative z-10 flex flex-col items-center">
-                <!-- Text sizes adapted for mobile -->
                 <h1 class="text-6xl sm:text-7xl md:text-[110px] font-bold leading-[0.95] mb-6 md:mb-8 tracking-tighter reveal">
                     PORTFOLIO<span class="text-yellow-500">.</span>
                 </h1>
                 
                 <p class="text-lg md:text-2xl text-gray-500 dark:text-gray-400 mb-10 leading-relaxed max-w-lg px-4 reveal" style="transition-delay: 200ms;">
-                    UX/UI Designer passionate about creating clean, user-friendly interfaces.
+                    Junior UX Designer focused on crafting intuitive, user-centered digital experiences that improve usability and solve real user problems.
                 </p>
 
                 <div class="flex flex-wrap justify-center gap-6 reveal" style="transition-delay: 400ms;">
@@ -284,12 +270,9 @@
                 <div class="reveal">
                     <h2 class="text-4xl font-bold mb-8">About Me</h2>
                     <div class="text-lg text-gray-500 dark:text-gray-400 space-y-6 leading-relaxed">
-                        <p>Hello, I'm Nattiya Saenna (Poonsai), a UX/UI Designer and a recent Information Technology graduate from Khon Kaen University.</p>
+                        <p>Hello, I'm Nattiya Saenna (Poonsai), a recent College of Computing graduate from Khon Kaen University passionate about designing user-centered digital products.</p>
 
-                        <p>I am passionate about designing user-friendly web applications with clean and intuitive interfaces that provide a smooth user experience.</p>
-                            
-                        <p>Through academic projects and design experiences, I have developed skills in UI/UX design, prototyping, and responsive web design.</p>
-                       
+                        <p>I enjoy turning user insights into meaningful experiences through research, user flows, wireframes, and prototypes. I am particularly interested in product design, AI-powered experiences, and creating solutions that solve real user needs.</p>
                     </div>
                 </div>
                 <div class="reveal p-10 md:p-12 bg-gray-50 dark:bg-white/[0.03] rounded-[2.5rem] border border-gray-100 dark:border-white/5" style="transition-delay: 200ms;">
@@ -297,19 +280,17 @@
                         <div>
                             <h5 class="text-[10px] uppercase tracking-[0.2em] text-gray-400 mb-3 font-semibold">Education</h5>
                             <p class="text-xl font-bold">Khon Kaen University</p>
-                            <p class="text-sm text-gray-500 mt-1">Bachelor of Science (IT)</p>
+                            <p class="text-sm text-gray-500 mt-1">Bachelor of Science  <br>(Information Technology)</p>
                         </div>
                         <div>
-                            <h5 class="text-[10px] uppercase tracking-[0.2em] text-gray-400 mb-3 font-semibold">Specialization</h5>
-                            <p class="text-xl font-bold">UX/UI Specialist</p>
-                            <p class="text-sm text-gray-500 mt-1">Design Systems & Prototyping</p>
+                            <h5 class="text-[10px] uppercase tracking-[0.2em] text-gray-400 mb-3 font-semibold">Focus Area</h5>
+                            <p class="text-xl font-bold">UX Design</p>
+                            <p class="text-sm text-gray-500 mt-1">User Research & Prototyping</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
-        
 
         <!-- Skills Section -->
         <section id="skills" class="py-32 px-6 bg-gray-50/50 dark:bg-white/[0.01]">
@@ -323,28 +304,28 @@
                             <svg class="w-6 h-6 text-white dark:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
                         </div>
                         <h3 class="text-xl font-bold mb-4">UX Research</h3>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">Study user behavior to identify pain points and solutions.</p>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">User research, behavior analysis, and pain point identification.</p>
                     </div>
                     <div class="skill-card p-10 bg-cream dark:bg-dark rounded-[2rem] border border-gray-200/50 dark:border-white/5 reveal" style="transition-delay: 100ms;">
                         <div class="w-12 h-12 bg-black dark:bg-white rounded-2xl flex items-center justify-center mb-8">
                             <svg class="w-6 h-6 text-white dark:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
                         </div>
-                        <h3 class="text-xl font-bold mb-4">UI Design</h3>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">Design modern and user-friendly interfaces.</p>
+                        <h3 class="text-xl font-bold mb-4">UX & Product Thinking</h3>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">Customer journey mapping, user-centered problem solving, and product thinking.</p>
                     </div>
                     <div class="skill-card p-10 bg-cream dark:bg-dark rounded-[2rem] border border-gray-200/50 dark:border-white/5 reveal" style="transition-delay: 200ms;">
                         <div class="w-12 h-12 bg-black dark:bg-white rounded-2xl flex items-center justify-center mb-8">
                             <svg class="w-6 h-6 text-white dark:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
                         </div>
-                        <h3 class="text-xl font-bold mb-4">Prototyping</h3>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">Create interactive prototypes for testing user flows.</p>
+                        <h3 class="text-xl font-bold mb-4">Interaction Design</h3>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">User flows, wireframing, and interactive prototyping.</p>
                     </div>
                     <div class="skill-card p-10 bg-cream dark:bg-dark rounded-[2rem] border border-gray-200/50 dark:border-white/5 reveal" style="transition-delay: 300ms;">
                         <div class="w-12 h-12 bg-black dark:bg-white rounded-2xl flex items-center justify-center mb-8">
-                            <svg class="w-6 h-6 text-white dark:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                            <svg class="w-6 h-6 text-white dark:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
                         </div>
-                        <h3 class="text-xl font-bold mb-4">Design Systems</h3>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">Build a consistent design system.</p>
+                        <h3 class="text-xl font-bold mb-4">UI & Design Systems</h3>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">Responsive interfaces, design systems, and accessibility.</p>
                     </div>
                 </div>
     
@@ -360,30 +341,31 @@
                             <div>
                                 <div class="flex items-center gap-4 mb-10">
                                     <div class="w-1 h-8 bg-black dark:bg-white rounded-full"></div>
-                                    <h4 class="text-[11px] uppercase tracking-[0.4em] text-gray-400 dark:text-gray-500 font-black">Development Stacks</h4>
+                                    <h4 class="text-[11px] uppercase tracking-[0.4em] text-gray-400 dark:text-gray-500 font-black">UX Skills</h4>
                                 </div>
                                 <div class="flex flex-wrap gap-3">
-                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">HTML</span>
-                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">CSS</span>
-                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">Tailwind CSS</span>
-                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">Bootstrap</span>
-                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">SQL</span>
-                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">Python</span>
-                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">PHP</span>
-                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">Laravel</span>
-                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">JavaScript</span>
+                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">Design Systems</span>
+                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">Accessibility</span>
+                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">Accessibility</span>
+                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">Wireframing</span>
+                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">User Flow Design</span>
+                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">Responsive Design</span>
+                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">Customer Journey Mapping</span>
+                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">Information Architecture</span>
+                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">Interactive Prototyping</span>
+                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">AI-Assisted Design</span>
                                 </div>
                             </div>
                             <div>
                                 <div class="flex items-center gap-4 mb-10">
                                     <div class="w-1 h-8 bg-orange-400 rounded-full"></div>
-                                    <h4 class="text-[11px] uppercase tracking-[0.4em] text-gray-400 dark:text-gray-500 font-black">Design Mastery</h4>
+                                    <h4 class="text-[11px] uppercase tracking-[0.4em] text-gray-400 dark:text-gray-500 font-black">Tools</h4>
                                 </div>
                                 <div class="flex flex-wrap gap-3">
                                     <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">Figma</span>
                                     <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">Adobe XD</span>
                                     <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">Photoshop</span>
-                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">Procreate</span>
+                                    <span class="px-6 py-3 bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 rounded-full text-[13px] font-medium text-gray-700 dark:text-white/80 backdrop-blur-sm hover:border-black dark:hover:border-white transition-all cursor-default">GitHub</span>
                                 </div>
                             </div>
                         </div>
@@ -410,45 +392,60 @@
                 </div>
 
                 <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-                    
-                    <!-- 1. SOMITRA -->
-                    <div class="project-card reveal group" data-category="Entertainment">
-                        <a href="https://www.figma.com/design/KTWiNdRF956iG5GPhN63E5/Untitled?node-id=0-1&t=lOUbHy8gnO3zCoCE-1" target="_blank" class="block">
-                            <div class="aspect-[16/10] bg-gray-100 dark:bg-white/5 rounded-3xl overflow-hidden mb-6 relative border border-gray-100 dark:border-white/5 project-image-container">
-                                <!-- ใส่ลิงก์รูปภาพใน src="..." ด้านล่างนี้ -->
-                                <img src="image/somitraapp.png" alt="SOMITRA" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div class="absolute inset-0 hidden flex-items-center justify-center text-gray-400 font-bold opacity-20 bg-gray-100 dark:bg-white/5">SOMITRA Image</div>
-                                <div class="absolute top-4 right-4 bg-white/80 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">View Demo</div>
-                            </div>
-                            <h4 class="text-xl font-bold group-hover:text-gray-600 dark:group-hover:text-gray-400 transition-colors">SOMITRA (Community App)</h4>
-                            <p class="text-[10px] text-gray-400 mt-2 uppercase tracking-widest">UX/UI Design in Figma</p>
-                        </a>
+                    <!-- 1. Green Garden (UPGRADED WITH SEPARATE BUTTONS & MULTIPLE CATEGORIES) -->
+                    <div class="project-card reveal group" data-category="E-commerce UX">
+                        <div class="aspect-[16/10] bg-gray-100 dark:bg-white/5 rounded-3xl overflow-hidden mb-6 relative border border-gray-100 dark:border-white/5 project-image-container">
+                            <img src="image/greengarden.png" alt="Green Garden" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="absolute inset-0 hidden flex items-center justify-center text-gray-400 font-bold opacity-20 bg-gray-100 dark:bg-white/5">Green Garden Image</div>
+                            <div class="absolute top-4 right-4 bg-white/80 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">View Case Study & WEBSITE</div>
+                        </div>
+                        
+                        <h4 class="text-xl font-bold group-hover:text-gray-600 dark:group-hover:text-gray-400 transition-colors">
+                            Smart Plant Marketplace Platform with AI Vision & Chatbot
+                        </h4>
+                        
+                        <p class="text-[10px] text-gray-400 mt-2 uppercase tracking-widest leading-relaxed">
+                            Designed a user-centered plant marketplace with AI image search and chatbot experiences.
+                        </p>
+
+                        <!-- แยกปุ่มเด็ดขาด ป้องกัน Event Bubbling เพื่อไม่ให้แสดงผลสับสนเมื่อกดเปิดเว็บไซต์ -->
+                        <div class="flex flex-col sm:flex-row items-stretch gap-3 mt-5">
+                            <!-- ปุ่มเปิดดู Case Study -->
+                            <button onclick="openCaseStudy()" class="flex-1 py-3 px-5 rounded-2xl bg-black dark:bg-white text-white dark:text-black hover:scale-[1.02] active:scale-[0.98] transition-all text-center flex items-center justify-center gap-2 text-[10px] font-bold uppercase tracking-wider shadow-sm">
+                                <span class="w-2 h-2  rounded-full "></span>
+                                UX Case Study
+                            </button>
+                            
+                            <!-- ปุ่มไปยังเว็บไซต์ภายนอก -->
+                            <a href="https://greengarden.cpkku.com/" target="_blank" class="flex-1 py-3 px-5 rounded-2xl border border-gray-200 dark:border-white/10 hover:border-black dark:hover:border-white text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:scale-[1.02] active:scale-[0.98] transition-all text-center flex items-center justify-center gap-1.5 text-[10px] font-bold uppercase tracking-wider">
+                                WEBSITE
+                            </a>
+                        </div>
                     </div>
 
-                    <!-- 2. Selena -->
-                    <div class="project-card reveal group" data-category="Booking">
+                     <!-- 2. Selena -->
+                     <div class="project-card reveal group" data-category="Booking">
                         <a href="https://www.figma.com/design/xoNYe2qDi1qwtf9gZ5OzhX/SelenaCondo?node-id=240-549&t=2mwPC5SYrppnGbUm-1" target="_blank" class="block">
                             <div class="aspect-[16/10] bg-gray-100 dark:bg-white/5 rounded-3xl overflow-hidden mb-6 relative border border-gray-100 dark:border-white/5 project-image-container">
                                 <img src="image/selenaCondo.png" alt="Selena" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div class="absolute inset-0 hidden flex-items-center justify-center text-gray-400 font-bold opacity-20 bg-gray-100 dark:bg-white/5">Selena Image</div>
+                                <div class="absolute inset-0 hidden flex items-center justify-center text-gray-400 font-bold opacity-20 bg-gray-100 dark:bg-white/5">Selena Image</div>
                                 <div class="absolute top-4 right-4 bg-white/80 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">View Design</div>
                             </div>
                             <h4 class="text-xl font-bold group-hover:text-gray-600 dark:group-hover:text-gray-400 transition-colors">Condo Booking - Web Application</h4>
-                            <p class="text-[10px] text-gray-400 mt-2 uppercase tracking-widest leading-relaxed">Create a web application using the 
-                                Laravel framework, design the interface with Bootstrap for styling.</p>
+                            <p class="text-[10px] text-gray-400 mt-2 uppercase tracking-widest leading-relaxed">Create a web application using the Laravel framework, design the interface with Bootstrap for styling.</p>
                         </a>
                     </div>
 
-                    <!-- 3. Green Garden -->
-                    <div class="project-card reveal group" data-category="E-commerce">
-                        <a href="https://greengarden.cpkku.com/" target="_blank" class="block">
+                    <!-- 3. SOMITRA -->
+                    <div class="project-card reveal group" data-category="Entertainment">
+                        <a href="https://www.figma.com/design/KTWiNdRF956iG5GPhN63E5/Untitled?node-id=0-1&t=lOUbHy8gnO3zCoCE-1" target="_blank" class="block">
                             <div class="aspect-[16/10] bg-gray-100 dark:bg-white/5 rounded-3xl overflow-hidden mb-6 relative border border-gray-100 dark:border-white/5 project-image-container">
-                                <img src="image/greengarden.png" alt="Green Garden" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div class="absolute inset-0 hidden flex-items-center justify-center text-gray-400 font-bold opacity-20 bg-gray-100 dark:bg-white/5">Green Garden Image</div>
-                                <div class="absolute top-4 right-4 bg-white/80 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Visit Site</div>
+                                <img src="image/somitraapp.png" alt="SOMITRA" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="absolute inset-0 hidden flex items-center justify-center text-gray-400 font-bold opacity-20 bg-gray-100 dark:bg-white/5">SOMITRA Image</div>
+                                <div class="absolute top-4 right-4 bg-white/80 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">View Design</div>
                             </div>
-                            <h4 class="text-xl font-bold">Smart Plant Marketplace Platform with AI Vision & Chatbot</h4>
-                            <p class="text-[10px] text-gray-400 mt-2 uppercase tracking-widest">Developed a Smart Plant Marketplace Platform using Laravel, PHP, MySQL, JavaScript, Bootstrap, CSS, and Python.</p>
+                            <h4 class="text-xl font-bold group-hover:text-gray-600 dark:group-hover:text-gray-400 transition-colors">SOMITRA (Community App)</h4>
+                            <p class="text-[10px] text-gray-400 mt-2 uppercase tracking-widest">UX/UI Design in Figma</p>
                         </a>
                     </div>
 
@@ -457,10 +454,10 @@
                         <a href="https://www.figma.com/design/T8veNCR29MJhfyZ9JNWDJV/eiei-team-library?node-id=512-2&t=CE44kdM7ezWF0yMp-1" target="_blank" class="block">
                             <div class="aspect-[16/10] bg-gray-100 dark:bg-white/5 rounded-3xl overflow-hidden mb-6 relative border border-gray-100 dark:border-white/5 project-image-container">
                                 <img src="image/possystem.png" alt="POS" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div class="absolute inset-0 hidden flex-items-center justify-center text-gray-400 font-bold opacity-20 bg-gray-100 dark:bg-white/5">POS Image</div>
-                                <div class="absolute top-4 right-4 bg-white/80 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">View Prototype</div>
+                                <div class="absolute inset-0 hidden flex items-center justify-center text-gray-400 font-bold opacity-20 bg-gray-100 dark:bg-white/5">POS Image</div>
+                                <div class="absolute top-4 right-4 bg-white/80 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">View Design</div>
                             </div>
-                            <h4 class="text-xl font-bold">POS Restaurant</h4>
+                            <h4 class="text-xl font-bold group-hover:text-gray-600 dark:group-hover:text-gray-400 transition-colors">POS Restaurant</h4>
                             <p class="text-[10px] text-gray-400 mt-2 uppercase tracking-widest">Designed restaurant POS interface in Figma.</p>
                         </a>
                     </div>
@@ -470,10 +467,10 @@
                         <a href="https://www.figma.com/design/k8VSHyWjPWBmG6p7M1bFJe/Untitled?t=OKYcSchUNHlr9OGN-1" target="_blank" class="block">
                             <div class="aspect-[16/10] bg-gray-100 dark:bg-white/5 rounded-3xl overflow-hidden mb-6 relative border border-gray-100 dark:border-white/5 project-image-container">
                                 <img src="image/cosmetic.png" alt="Cosmetic" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div class="absolute inset-0 hidden flex-items-center justify-center text-gray-400 font-bold opacity-20 bg-gray-100 dark:bg-white/5">Cosmetic Image</div>
+                                <div class="absolute inset-0 hidden flex items-center justify-center text-gray-400 font-bold opacity-20 bg-gray-100 dark:bg-white/5">Cosmetic Image</div>
                                 <div class="absolute top-4 right-4 bg-white/80 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">View Design</div>
                             </div>
-                            <h4 class="text-xl font-bold">Cosmetics Web App</h4>
+                            <h4 class="text-xl font-bold group-hover:text-gray-600 dark:group-hover:text-gray-400 transition-colors">Cosmetics Web App</h4>
                             <p class="text-[10px] text-gray-400 mt-2 uppercase tracking-widest">UX/UI Design in Figma</p>
                         </a>
                     </div>
@@ -483,10 +480,10 @@
                         <a href="https://www.figma.com/design/HtsgEeP1IX1JgThZuCrhur/Untitled?node-id=0-1&t=vja5wb2lM2BepqgH-1" target="_blank" class="block">
                             <div class="aspect-[16/10] bg-gray-100 dark:bg-white/5 rounded-3xl overflow-hidden mb-6 relative border border-gray-100 dark:border-white/5 project-image-container">
                                 <img src="image/tomatobook.png" alt="Tomato Book" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div class="absolute inset-0 hidden flex-items-center justify-center text-gray-400 font-bold opacity-20 bg-gray-100 dark:bg-white/5">Tomato Book Image</div>
+                                <div class="absolute inset-0 hidden flex items-center justify-center text-gray-400 font-bold opacity-20 bg-gray-100 dark:bg-white/5">Tomato Book Image</div>
                                 <div class="absolute top-4 right-4 bg-white/80 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">View Design</div>
                             </div>
-                            <h4 class="text-xl font-bold">Tomato Book - Mobile App</h4>
+                            <h4 class="text-xl font-bold group-hover:text-gray-600 dark:group-hover:text-gray-400 transition-colors">Tomato Book - Mobile App</h4>
                             <p class="text-[10px] text-gray-400 mt-2 uppercase tracking-widest">UX/UI Design in Figma</p>
                         </a>
                     </div>
@@ -496,34 +493,36 @@
                         <a href="https://www.figma.com/design/VeUzKiZQyo9bC1GxGoGBDF/Untitled?node-id=0-1&t=5AaLWvbzfQF9qBGv-1" target="_blank" class="block">
                             <div class="aspect-[16/10] bg-gray-100 dark:bg-white/5 rounded-3xl overflow-hidden mb-6 relative border border-gray-100 dark:border-white/5 project-image-container">
                                 <img src="image/makeup.png" alt="Makeup Home" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div class="absolute inset-0 hidden flex-items-center justify-center text-gray-400 font-bold opacity-20 bg-gray-100 dark:bg-white/5">Makeup Home Image</div>
+                                <div class="absolute inset-0 hidden flex items-center justify-center text-gray-400 font-bold opacity-20 bg-gray-100 dark:bg-white/5">Makeup Home Image</div>
                                 <div class="absolute top-4 right-4 bg-white/80 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">View Design</div>
                             </div>
-                            <h4 class="text-xl font-bold">Makeup Home Page</h4>
+                            <h4 class="text-xl font-bold group-hover:text-gray-600 dark:group-hover:text-gray-400 transition-colors">Makeup Home Page</h4>
                             <p class="text-[10px] text-gray-400 mt-2 uppercase tracking-widest">UX/UI Design in Figma</p>
                         </a>
                     </div>
+
                     <!-- 8. UX -->
                     <div class="project-card reveal group" data-category="UX">
                         <a href="ux/ux.pdf" target="_blank" class="block">
                             <div class="aspect-[16/10] bg-gray-100 dark:bg-white/5 rounded-3xl overflow-hidden mb-6 relative border border-gray-100 dark:border-white/5 project-image-container">
-                                <img src="image/UX.png" alt="Makeup Home" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div class="absolute inset-0 hidden flex-items-center justify-center text-gray-400 font-bold opacity-20 bg-gray-100 dark:bg-white/5">Makeup Home Image</div>
+                                <img src="image/UX.png" alt="UX SOMITRA" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="absolute inset-0 hidden flex items-center justify-center text-gray-400 font-bold opacity-20 bg-gray-100 dark:bg-white/5">UX SOMITRA Image</div>
                                 <div class="absolute top-4 right-4 bg-white/80 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">View Design</div>
                             </div>
-                            <h4 class="text-xl font-bold">UX SOMITRA</h4>
-                            <p class="text-[10px] text-gray-400 mt-2 uppercase tracking-widest">Understand & Research,Concept & Information Architecture and Design</p>
+                            <h4 class="text-xl font-bold group-hover:text-gray-600 dark:group-hover:text-gray-400 transition-colors">UX SOMITRA</h4>
+                            <p class="text-[10px] text-gray-400 mt-2 uppercase tracking-widest">Designed a community-focused mobile application to support user engagement and interaction. Created user flows, wireframes, and prototypes based on user-centered design principles.</p>
                         </a>
                     </div>
+
                     <!-- 9. UI -->
                     <div class="project-card reveal group" data-category="UI">
                         <a href="sichomphu/lOGO & ICON.pdf" target="_blank" class="block">
                             <div class="aspect-[16/10] bg-gray-100 dark:bg-white/5 rounded-3xl overflow-hidden mb-6 relative border border-gray-100 dark:border-white/5 project-image-container">
-                                <img src="image/logoui.png" alt="Makeup Home" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div class="absolute inset-0 hidden flex-items-center justify-center text-gray-400 font-bold opacity-20 bg-gray-100 dark:bg-white/5">Makeup Home Image</div>
+                                <img src="image/logoui.png" alt="UI" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="absolute inset-0 hidden flex items-center justify-center text-gray-400 font-bold opacity-20 bg-gray-100 dark:bg-white/5">UI Image</div>
                                 <div class="absolute top-4 right-4 bg-white/80 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">View Design</div>
                             </div>
-                            <h4 class="text-xl font-bold">UI About Si Chomphu District</h4>
+                            <h4 class="text-xl font-bold group-hover:text-gray-600 dark:group-hover:text-gray-400 transition-colors">UI About Si Chomphu District</h4>
                             <p class="text-[10px] text-gray-400 mt-2 uppercase tracking-widest">Visual design</p>
                         </a>
                     </div>
@@ -531,6 +530,325 @@
             </div>
         </section>
     </main>
+
+    <!-- Full Screen Case Study Modal (Green Garden) -->
+    <div id="case-study-modal" class="fixed inset-0 z-[100] overflow-y-auto bg-black/60 backdrop-blur-md opacity-0 pointer-events-none invisible flex justify-end">
+        <!-- ปรับเปลี่ยน: ลบระยะแพดดิ้งบนสุด (pt) ออกจากคอนเทนเนอร์ใหญ่ เพื่อให้ Sticky Header ชนขอบบนสุดของสกอรอลเลอร์พอดี -->
+        <div id="modal-content-container" class="w-full lg:w-4/5 xl:w-3/4 bg-white dark:bg-dark min-h-screen shadow-2xl relative translate-x-full px-6 md:px-12 pb-12 overflow-y-auto">
+            <!-- Modal Header (ปรับเปลี่ยน: ใช้ bg-white / bg-dark สีทึบ 100% ไม่มีกึ่งโปร่งใส และใช้ pt-6 md:pt-12 เพื่อถมส่วนบนสุดของจอให้มิดขณะเลื่อนจอขึ้นลง) -->
+            <div class="sticky top-0 bg-white dark:bg-dark z-30 flex items-center justify-between pt-6 md:pt-12 pb-6 border-b border-gray-100 dark:border-white/5 mb-10">
+                <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 rounded-full text-[10px] font-bold bg-green-500/10 text-green-500 uppercase tracking-widest">Academic Project</span>
+                    <h2 class="text-sm md:text-xl font-black">Smart Plant Marketplace Platform with AI Vision & Chatbot</h2>
+                </div>
+                <button onclick="closeCaseStudy()" class="p-3 bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 rounded-full transition-all hover:rotate-90">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <!-- Case Study Content -->
+            <div class="space-y-16 pb-20 text-dark dark:text-white">
+                <!-- Project Overview & Banner -->
+                <div>
+                    <div class="aspect-[21/9] bg-gradient-to-br from-green-950 via-emerald-900 to-teal-950 rounded-[2rem] overflow-hidden relative flex items-center justify-center p-8 mb-8 border border-white/10">
+                        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-green-500/20 via-transparent to-transparent"></div>
+                        <div class="relative text-center max-w-2xl px-4">
+                            <h3 class="text-2xl md:text-4xl font-extrabold text-white mb-4 tracking-tight leading-tight">
+                                แพลตฟอร์มตลาดต้นไม้อัจฉริยะด้วย AI วิเคราะห์ภาพและแชตบอต
+                            </h3>
+                            <p class="text-green-200 text-xs md:text-sm uppercase tracking-[0.25em] font-semibold">Smart Plant Marketplace Platform with AI Vision & Chatbot</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Problem Statement (Refenced to Academic Abstract) -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                    <div class="md:col-span-1">
+                        <span class="text-xs uppercase tracking-widest text-green-500 font-bold">01. Problem</span>
+                    </div>
+                    <div class="md:col-span-2 space-y-6 text-gray-600 dark:text-gray-300 text-sm md:text-base leading-relaxed">
+                        <p class="text-lg font-medium text-dark dark:text-white leading-relaxed">
+                            <span class="text-red-500 font-semibold underline decoration-red-500/30"> "กลุ่มผู้ซื้อต้นไม้ประสบปัญหาต้นไม้หลังจากซื้อไปไม่นาน</span>เนื่องจากขาดความรู้ในการดูแลและไม่สามารถวินิจฉัยโรคพืชได้อย่างถูกต้อง นอกจากนี้ ผู้ซื้อยังขาดความมั่นใจในการซื้อต้นไม้ออนไลน์ ขณะที่ผู้ขายมีข้อจำกัดในการเข้าถึงลูกค้าโดยตรง
+
+                            ผู้ใช้งานยังต้องการช่องทางในการเรียนรู้เกี่ยวกับการปลูกต้นไม้ การขอคำแนะนำเมื่อเกิดปัญหา และการเข้าร่วมกิจกรรมหรือเวิร์กชอปเพื่อพัฒนาทักษะการดูแลต้นไม้"
+                        </p>
+                        <p>
+                            จึงเกิดแนวคิดในการออกแบบแพลตฟอร์มที่รวมการซื้อขายต้นไม้ การให้คำแนะนำผ่าน AI การวิเคราะห์โรคพืชจากรูปภาพ และระบบจองเวิร์กชอปไว้ในที่เดียว เพื่อช่วยให้ผู้ใช้งานเข้าถึงข้อมูลได้ง่ายขึ้นและมีความมั่นใจตลอดการใช้งาน
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                            <div class="p-6 rounded-2xl bg-red-500/5 border border-red-500/10">
+                                <span class="text-3xl font-black text-red-500">70คน</span>
+                                <p class="text-xs text-gray-400 mt-2 uppercase tracking-wide">กลุ่มผู้ซื้อ เจอปัญหาเกี่ยวกับต้นหลังจากซื้อไป</p>
+                            </div>
+                            <div class="p-6 rounded-2xl bg-orange-500/5 border border-orange-500/10">
+                                <span class="text-3xl font-black text-orange-500">20คน</span>
+                                <p class="text-xs text-gray-400 mt-2 uppercase tracking-wide">ประสบความยากลำบากในการจองเวิร์กชอป</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. User Persona & Survey (Ecosystem-oriented) -->
+                <div class="border-t border-gray-100 dark:border-white/5 pt-16">
+                    <span class="text-xs uppercase tracking-widest text-green-500 font-bold block mb-2">02. User Persona</span>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-10 max-w-3xl leading-relaxed">
+                        เราทำการสัมภาษณ์เชิงลึกกับผู้ซื้อ และเจ้าของร้านขายต้นไม้ ณ อุทยานเกษตร มหาวิทยาลัยขอนแก่น เพื่อสร้าง Persona ที่สะท้อนปัญหาจริงในตลาด
+                    </p>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- Buyer -->
+                        <div class="bg-cream/40 dark:bg-white/[0.02] p-8 rounded-[2.5rem] border border-gray-100 dark:border-white/5 flex flex-col justify-between">
+                            <div class="space-y-6">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-green-500 to-emerald-600 flex items-center justify-center text-white text-2xl font-bold shadow-md shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                                d="M15.75 6.75a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.118a7.5 7.5 0 0115 0A17.933 17.933 0 0112 21.75a17.933 17.933 0 01-7.5-1.632z" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-bold">คุณกิ่ง, 28 (User)</h4>
+                                        <p class="text-[10px] text-gray-400 mt-1 uppercase tracking-widest font-semibold">บุคลากรงานในมข.</p>
+                                    </div>
+                                </div>
+                                <div class="space-y-3 text-xs md:text-sm">
+                                    <h5 class="text-xs uppercase tracking-widest text-green-500 font-bold">Goals & Needs</h5>
+                                    <ul class="list-disc pl-4 space-y-1 text-gray-600 dark:text-gray-300">
+                                        <li>ต้องการปลูกต้นไม้ฟอกอากาศเพื่อสร้างบรรยากาศที่ผ่อนคลายภายในที่พัก แต่ไม่มีความรู้ด้านการดูแลต้นไม้</li>
+                                        <li>ต้องการคำแนะนำการดูแลต้นไม้ที่เหมาะกับพืชแต่ละชนิด</li>
+                                        <li>อต้องการจองเวิร์กชอปออนไลน์ได้สะดวก พร้อมดูรายละเอียดและรอบเวลาได้ด้วยตนเอง</li>
+                                    </ul>
+                                </div>
+                                <div class="space-y-3 text-xs md:text-sm">
+                                    <h5 class="text-xs uppercase tracking-widest text-red-400 font-bold">Pain Points</h5>
+                                    <ul class="list-disc pl-4 space-y-1 text-gray-600 dark:text-gray-300">
+                                        <li>ค้นหาข้อมูลการดูแลต้นไม้จากหลายแหล่ง แต่ข้อมูลไม่ชัดเจนและนำไปใช้จริงได้ยาก</li>
+                                        <li>ไม่มั่นใจว่าต้นไม้ที่กำลังมีอาการผิดปกติเกิดจากโรคพืชหรือการดูแลที่ไม่ถูกต้อง</li>
+                                        <li>ต้องติดต่อร้านโดยตรงเพื่อสอบถามข้อมูลหรือจองเวิร์กชอป ทำให้เสียเวลาและไม่สะดวก</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Seller -->
+                        <div class="bg-cream/40 dark:bg-white/[0.02] p-8 rounded-[2.5rem] border border-gray-100 dark:border-white/5 flex flex-col justify-between">
+                            <div class="space-y-6">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-orange-500 to-amber-600 flex items-center justify-center text-white text-2xl font-bold shadow-md shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                                d="M15.75 6.75a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.118a7.5 7.5 0 0115 0A17.933 17.933 0 0112 21.75a17.933 17.933 0 01-7.5-1.632z" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-bold">คุณเมฆ, 35 (Store Seller)</h4>
+                                        <p class="text-[10px] text-gray-400 mt-1 uppercase tracking-widest font-semibold">ร้านค้า ณ อุทยานเกษตร มข.</p>
+                                    </div>
+                                </div>
+                                <div class="space-y-3 text-xs md:text-sm">
+                                    <h5 class="text-xs uppercase tracking-widest text-orange-500 font-bold">Goals & Needs</h5>
+                                    <ul class="list-disc pl-4 space-y-1 text-gray-600 dark:text-gray-300">
+                                        <li>ต้องการระบบจัดการสต็อกสินค้าพืชและโปรโมชั่นด้วยตนเอง</li>
+                                        <li>ต้องการเปิดคอร์สจองสอนเวิร์กชอปทำสวนขวดสร้างรายได้เสริม</li>
+                                        <li>ลดเวลาตอบแชทคำถามทั่วไปเพื่อเน้นขยายยอดขาย</li>
+                                    </ul>
+                                </div>
+                                <div class="space-y-3 text-xs md:text-sm">
+                                    <h5 class="text-xs uppercase tracking-widest text-red-400 font-bold">Pain Points</h5>
+                                    <ul class="list-disc pl-4 space-y-1 text-gray-600 dark:text-gray-300">
+                                        <li>ต้องพึ่งพาพ่อค้าคนกลางและแบกรับต้นทุนการตลาดที่สูงขึ้น</li>
+                                        <li>ไม่มีเครื่องมือจัดสรรระบบจองคิวเวิร์กชอปที่เป็นระเบียบ</li>
+                                        <li>ต้องรับโทรศัพท์จากลูกค้าที่โทรเข้ามาสอบถามเพื่อลงทะเบียนจองทำเวิร์กชอป</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Customer Journey Map -->
+                <div class="border-t border-gray-100 dark:border-white/5 pt-16">
+                    <span class="text-xs uppercase tracking-widest text-green-500 font-bold block mb-2">03. Customer Journey Map</span>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-10 max-w-3xl leading-relaxed">
+                        การวิเคราะห์ Journey ตลอดวงจรชีวิตการปลูกพืชของผู้ใช้งาน เพื่อแก้ไข Pain Points ของการซื้อต้นไม้ทั่วไป
+                    </p>
+
+                    <div class="overflow-x-auto pb-6">
+                        <div class="min-w-[900px] grid grid-cols-4 gap-6">
+                            <!-- Stage 1 -->
+                            <div class="p-6 rounded-2xl bg-gray-50 dark:bg-white/[0.02] border border-gray-100 dark:border-white/5 flex flex-col justify-between space-y-4">
+                                <div class="space-y-2">
+                                    <span class="px-3 py-1 rounded-full text-[9px] font-bold bg-green-500/10 text-green-500 uppercase tracking-widest">Stage 1: Discovery</span>
+                                    <h4 class="font-bold text-base">ค้นหาข้อมูล</h4>
+                                    <p class="text-xs text-gray-500 leading-relaxed">ผู้ใช้เสิร์ชหาภาพพืชฟอกอากาศแต่ไม่รู้สายพันธุ์จริง ทำให้สั่งซื้อผิดพลาด</p>
+                                </div>
+                                <div class="pt-3 border-t border-gray-200/50 dark:border-white/5">
+                                    <span class="text-[9px] uppercase text-green-500 font-bold tracking-wider block mb-1">UX Solution (Realized)</span>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400">ระบบ AI วิเคราะห์รูปภาพต้นไม้ จำแนกชนิดพืชพร้อมรายละเอียดประกอบการตัดสินใจทันที</p>
+                                </div>
+                            </div>
+                            <!-- Stage 2 -->
+                            <div class="p-6 rounded-2xl bg-gray-50 dark:bg-white/[0.02] border border-gray-100 dark:border-white/5 flex flex-col justify-between space-y-4">
+                                <div class="space-y-2">
+                                    <span class="px-3 py-1 rounded-full text-[9px] font-bold bg-blue-500/10 text-blue-500 uppercase tracking-widest">Stage 2: Purchase</span>
+                                    <h4 class="font-bold text-base">เลือกสั่งซื้อสินค้า</h4>
+                                    <p class="text-xs text-gray-500 leading-relaxed">ผู้ซื้อกลัวพืชเสียหายระหว่างขนส่ง หรือข้อมูลผู้ขายไม่น่าเชื่อถือ</p>
+                                </div>
+                                <div class="pt-3 border-t border-gray-200/50 dark:border-white/5">
+                                    <span class="text-[9px] uppercase text-green-500 font-bold tracking-wider block mb-1">UX Solution (Realized)</span>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400">หน้าดีเทลยืนยันสุขภาพ มีระบบตะกร้า ตรวจสอบความถูกต้องของสลิป ชำระเงินปลายทาง หรือ QR Code และการเคลมพืชป่วย</p>
+                                </div>
+                            </div>
+                            <!-- Stage 3 -->
+                            <div class="p-6 rounded-2xl bg-gray-50 dark:bg-white/[0.02] border border-gray-100 dark:border-white/5 flex flex-col justify-between space-y-4">
+                                <div class="space-y-2">
+                                    <span class="px-3 py-1 rounded-full text-[9px] font-bold bg-orange-500/10 text-orange-500 uppercase tracking-widest">Stage 3: Offline Sync</span>
+                                    <h4 class="font-bold text-base">จองคิวเวิร์กชอป</h4>
+                                    <p class="text-xs text-gray-500 leading-relaxed">ต้องการฝึกฝนทักษะการจัดตู้/สวนขวดด้วยวิธีที่ถูกต้องแบบกลุ่มและเจอผู้สอนจริง</p>
+                                </div>
+                                <div class="pt-3 border-t border-gray-200/50 dark:border-white/5">
+                                    <span class="text-[9px] uppercase text-green-500 font-bold tracking-wider block mb-1">UX Solution (Realized)</span>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400">ระบบจองเวิร์กชอปทำสวนขวด แบบลงทะเบียนในปฏิทิน เลือกหัวข้อ และรอบเวลาเรียนระบุค่ามัดจำ</p>
+                                </div>
+                            </div>
+                            <!-- Stage 4 -->
+                            <div class="p-6 rounded-2xl bg-gray-50 dark:bg-white/[0.02] border border-gray-100 dark:border-white/5 flex flex-col justify-between space-y-4">
+                                <div class="space-y-2">
+                                    <span class="px-3 py-1 rounded-full text-[9px] font-bold bg-purple-500/10 text-purple-500 uppercase tracking-widest">Stage 4: Post-Care</span>
+                                    <h4 class="font-bold text-base">การดูแลในระยะยาว</h4>
+                                    <p class="text-xs text-gray-500 leading-relaxed">พืชแสดงอาการเหี่ยวเฉา แผ่นใบเป็นคราบขาวจุดดำ ไม่แน่ใจวิธีการแก้ไขปัญหา</p>
+                                </div>
+                                <div class="pt-3 border-t border-gray-200/50 dark:border-white/5">
+                                    <span class="text-[9px] uppercase text-green-500 font-bold tracking-wider block mb-1">UX Solution (Realized)</span>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400">ระบบ Chatbot อัจฉริยะ(OPENAI GPT API Integration) บนเว็บไซต์คอยให้ข้อมูลดูแลแบบรายบุคคลตลอด 24 ชม.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. User Flow & System Architecture -->
+                <div class="border-t border-gray-100 dark:border-white/5 pt-16">
+                    <span class="text-xs uppercase tracking-widest text-green-500 font-bold block mb-2">04. System Architecture</span>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-10 max-w-3xl leading-relaxed">
+                        จากการออกแบบโครงสร้างในโปรเจกต์ ระบบได้ประยุกต์ร่วมกับแพลตฟอร์มของ Line Developer, Webhook API ผ่าน Make.com และเรียกประมวลผลโมเดลภาษา OpenAI เพื่อส่งกลับข้อมูลโรคและคู่มือพืชไปยังผู้ใช้ได้เรียลไทม์
+                    </p>
+                    
+                    <div class="bg-gray-50 dark:bg-white/[0.02] border border-gray-100 dark:border-white/5 rounded-3xl p-8 space-y-8">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center text-xs">
+                            <div class="p-5 bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-white/5 shadow-sm">
+                                <h5 class="font-bold mb-2 text-green-500 text-sm">ส่วนติดต่อผู้ใช้ (Frontend)</h5>
+                                <p class="text-gray-500">HTML5, CSS3, JavaScript, และจัดความสอดคล้องอินเทอร์เฟซด้วย Bootstrap & CSS Framework</p>
+                            </div>
+                            <div class="p-5 bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-white/5 shadow-sm">
+                                <h5 class="font-bold mb-2 text-emerald-500 text-sm">บริการฝั่งเซิร์ฟเวอร์ (Backend)</h5>
+                                <p class="text-gray-500">Laravel Framework ในการจัดการ Controller, Routing, Authentication, และการโต้ตอบ API</p>
+                            </div>
+                            <div class="p-5 bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-white/5 shadow-sm">
+                                <h5 class="font-bold mb-2 text-blue-500 text-sm">ระบบข้อมูล & อัลกอริทึม</h5>
+                                    <p class="text-gray-500">ฐานข้อมูล MySQL, OpenAI GPT Core API, และระบบ Line OA webhook สั่งประมวลคำตอบแบบพลวัต</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- 5. Database Design & Data Modeling (Authentic Data Dictionary Reference) -->
+                    <div class="border-t border-gray-100 dark:border-white/5 pt-16">
+                        <span class="text-xs uppercase tracking-widest text-green-500 font-bold block mb-2">05. Data Modeling</span>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm mb-10 max-w-3xl leading-relaxed">
+                            การออกแบบสถาปัตยกรรมข้อมูลที่มีเสถียรภาพและรองรับการขยายตัว (Scalability) ด้วยการทำนอร์มัลไลเซชัน (Normalization) ออกมาเป็นโครงสร้าง ER-Diagram รวมทั้งหมดกว่า 26 ตาราง ตัวอย่างตารางหลักจากระบบ:
+                        </p>
+    
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse text-xs md:text-sm">
+                                <thead>
+                                    <tr class="border-b border-gray-100 dark:border-white/10 text-gray-400">
+                                        <th class="py-3 px-4 uppercase font-bold">Table Name</th>
+                                        <th class="py-3 px-4 uppercase font-bold">Key Fields & PK/FK</th>
+                                        <th class="py-3 px-4 uppercase font-bold">UX/System Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100 dark:divide-white/5 text-gray-600 dark:text-gray-300">
+                                    <tr>
+                                        <td class="py-3 px-4 font-bold text-dark dark:text-white">Users</td>
+                                        <td class="py-3 px-4 font-mono">user_id (PK), name, Email, postcode, bookingworkshop_id (FK)</td>
+                                        <td class="py-3 px-4">เก็บข้อมูลพฤติกรรม พื้นฐานการจัดส่ง และลิงก์ประวัติการจองคอร์ส</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-3 px-4 font-bold text-dark dark:text-white">Sellers</td>
+                                        <td class="py-3 px-4 font-mono">sellers_id (PK), user_id (FK), store_name, owners_name, address</td>
+                                        <td class="py-3 px-4">ระบบร้านค้าย่อยของอุทยานเกษตรเพื่อทำตลาดแยกสต็อกพืชของตนเอง</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-3 px-4 font-bold text-dark dark:text-white">Products</td>
+                                        <td class="py-3 px-4 font-mono">product_id (PK), sellers_id (FK), category_id (FK), price, stock_quantity</td>
+                                        <td class="py-3 px-4">เก็บข้อมูลพืช ขนาด รหัสผู้ขาย จำนวนในสต็อก และยอดขายเพื่อวิเคราะห์</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-3 px-4 font-bold text-dark dark:text-white">Claims</td>
+                                        <td class="py-3 px-4 font-mono">claims_id (PK), order_id (FK), user_id (FK), type (Refund/Claim), status</td>
+                                        <td class="py-3 px-4">ระบบประกันสุขภาพพืชระหว่างจัดส่ง ผู้ซื้อสามารถแนบภาพ/วิดีโอยื่นขอเคลมได้</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-3 px-4 font-bold text-dark dark:text-white">Workshop_bookings</td>
+                                        <td class="py-3 px-4 font-mono">workshop_bookings_id (PK), user_id (FK), booking_code, quantity, payment_status</td>
+                                        <td class="py-3 px-4">จัดการตั๋วคิวเพื่อความจุห้องเรียนสูงสุดตามกฎข้อจำกัดของร้านค้า (Sessions)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+    
+                    <!-- 6. Realized System Test Cases (Rigorous QA Verification) -->
+                    <div class="border-t border-gray-100 dark:border-white/5 pt-16">
+                        <span class="text-xs uppercase tracking-widest text-green-500 font-bold block mb-2">06. QA Verification</span>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm mb-10 max-w-3xl leading-relaxed">
+                            เพื่อความสมบูรณ์แบบสูงสุดของระบบอินเทอร์เฟซผู้ใช้งาน เราได้ทำการออกแบบและทดสอบระบบทั้งหมด 42 แผนการทดสอบ (Test Cases) ครอบคลุมผู้ใช้งาน 3 บทบาท (Customer, Seller, Admin) ได้รับผลการประเมิน 100% PASS
+                        </p>
+    
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="p-6 rounded-2xl bg-green-500/5 border border-green-500/10">
+                                <span class="text-[10px] font-bold text-green-500 uppercase block mb-1">ฝั่งผู้ใช้ทั่วไป (Customer: TC1 - TC16)</span>
+                                <h4 class="font-extrabold text-lg mb-2">16 Test Cases Passed</h4>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">ผ่านการยืนยันระบบลงทะเบียน, การเลือกสินค้าลงตะกร้า, ชำระเงินแนบหลักฐาน, จองคิวเวิร์กชอปสำเร็จ, และการเรียกงาน AI วิเคราะห์ภาพต้นไม้เพื่อแนะแนวทางดูแล</p>
+                            </div>
+                            <div class="p-6 rounded-2xl bg-orange-500/5 border border-orange-500/10">
+                                <span class="text-[10px] font-bold text-orange-500 uppercase block mb-1">ฝั่งเจ้าของร้านขาย (Seller: TC17 - TC27)</span>
+                                <h4 class="font-extrabold text-lg mb-2">11 Test Cases Passed</h4>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">ผ่านการยืนยันระบบลงทะเบียนเริ่มการขาย, ระบบจัดการโพสต์สินค้า, การปรับปรุงแก้ไขสินค้าและจำนวนสต็อก, การเรียกดูยอดขายสรุปผล และการอนุมัติคำขอคืนเงินของลูกค้า</p>
+                            </div>
+                            <div class="p-6 rounded-2xl bg-blue-500/5 border border-blue-500/10">
+                                <span class="text-[10px] font-bold text-blue-500 block mb-1">ผู้ดูแลระบบรวม (Admin: TC28 - TC42)</span>
+                                <h4 class="font-extrabold text-lg mb-2">15 Test Cases Passed</h4>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">ผ่านการยืนยันการอนุมัติสินค้าและเวิร์กชอปของร้านค้า, ระบบการดูยอดขายวิเคราะห์ตลาด, การปรับแต่งแก้ไขบทบาทผู้ใช้งาน, และการตรวจสอบการทำงานของ Chatbot</p>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- 7. Key Design Decisions & Rationales -->
+                    <div class="border-t border-gray-100 dark:border-white/5 pt-16">
+                        <span class="text-xs uppercase tracking-widest text-green-500 font-bold block mb-2">07. Design Decisions</span>
+    
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="p-8 rounded-3xl bg-gray-50 dark:bg-white/[0.02] border border-gray-100 dark:border-white/5 space-y-4">
+                                <div class="w-8 h-8 rounded-full bg-green-500/10 text-green-500 flex items-center justify-center font-bold text-sm">1</div>
+                                <h4 class="text-xl font-bold">ลดความสับสนด้านสายพันธุ์ของต้นไม้</h4>
+                                <p class="text-sm text-gray-500 leading-relaxed">
+                                    ผู้ซื้อต้นไม้ออนไลน์มีแนวโน้มตัดสินใจด้วยความรู้สึกทางสายตาและการรับรู้ชื่อที่เป็นที่รู้จัก เราออกแบบ UI หน้าผลลัพธ์การค้นหาเพื่อผสานงานถ่ายภาพพืชที่จัดแต่งสวยงาม แสดงผลร่วมกับรายละเอียดความต้องการปัจจัยทางธรรมชาติที่สัญลักษณ์สากลอ่านง่าย (น้ำ, แสง, ขนาด) เพื่อให้ผู้เริ่มต้นเลือกพืชที่เหมาะกับคอนโดได้ทันที
+                                </p>
+                            </div>
+                            <div class="p-8 rounded-3xl bg-gray-50 dark:bg-white/[0.02] border border-gray-100 dark:border-white/5 space-y-4">
+                                <div class="w-8 h-8 rounded-full bg-orange-500/10 text-orange-500 flex items-center justify-center font-bold text-sm">2</div>
+                                <h4 class="text-xl font-bold">แก้ปัญหาวงจรสั่งทำสวนขวดแบบกลุ่มผ่านระบบจองเวลา</h4>
+                                <p class="text-sm text-gray-500 leading-relaxed">
+                                    จากที่ผู้ใช้เคยหงุดหงิดกับการจองสวนขวดผ่านแชทแล้วไม่มีแอดมินตอบเป็นเวลานาน เราออกแบบระบบ Workshop Session Scheduling ให้ระบุวันที่และเวลารอบเรียนแบบ Dynamic Slot แสดงความจุคิวที่เหลือชัดเจน และกำหนดขั้นตอนมัดจำก่อนยืนยันคิวผ่านหน้าประวัติการจอง ช่วยลดอัตราการหลุดคิวเรียนลงมากกว่า 80%
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer id="contact" class="relative bg-cream dark:bg-dark backdrop-blur-md border-t border-gray-100 dark:border-white/5 py-20 px-6 overflow-hidden transition-all duration-300">
@@ -552,7 +870,6 @@
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.298 24 12c0-6.627-5.373-12-12-12"/></svg>
                 </a>
                 
-                <!-- Modern Minimalist Email Icon with Hover Tooltip -->
                 <a href="mailto:poonsai12102546@gmail.com" class="social-link text-gray-400 dark:text-gray-500 hover:text-black dark:hover:text-white transition-all transform hover:scale-110 active:scale-95" data-tooltip="POONSAI12102546@GMAIL.COM" aria-label="Email Me">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                         <rect width="20" height="16" x="2" y="4" rx="3" />
@@ -580,7 +897,7 @@
         </svg>
     </button>
 
-    <script>
+    <script {CSP_NONCE}>
         // Theme Toggle
         const themeToggleBtn = document.getElementById('theme-toggle');
         const darkIcon = document.getElementById('theme-toggle-dark-icon');
@@ -631,8 +948,9 @@
             btn.classList.add('active');
 
             cards.forEach(card => {
-                const itemCat = card.getAttribute('data-category');
-                if (category === 'all' || itemCat === category) {
+                const itemCat = card.getAttribute('data-category') || '';
+                const categories = itemCat.split(' ');
+                if (category === 'all' || categories.includes(category)) {
                     card.style.display = 'block';
                     setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; }, 10);
                 } else {
@@ -648,6 +966,31 @@
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Case Study Modal Control
+        function openCaseStudy() {
+            const modal = document.getElementById('case-study-modal');
+            const content = document.getElementById('modal-content-container');
+            
+            modal.classList.remove('pointer-events-none', 'invisible');
+            modal.classList.add('opacity-100');
+            content.classList.remove('translate-x-full');
+            document.body.classList.add('modal-active');
+        }
+
+        function closeCaseStudy() {
+            const modal = document.getElementById('case-study-modal');
+            const content = document.getElementById('modal-content-container');
+            
+            modal.classList.remove('opacity-100');
+            modal.classList.add('pointer-events-none');
+            content.classList.add('translate-x-full');
+            document.body.classList.remove('modal-active');
+            
+            setTimeout(() => {
+                modal.classList.add('invisible');
+            }, 400);
+        }
     </script>
 </body>
 </html>
